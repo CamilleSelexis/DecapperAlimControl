@@ -1,10 +1,11 @@
-//Arduino Nano Every Decapper PSU Control
+//Arduino Nano Every Decapper Power Control
 //Sketch by Camille Aussems - Selexis SA
 //Ver 1.0
 //06/02/2023
 //Implemented on an arduino nano every with an ENC28J60 based ethernet shield
 ///!\ Pin 8 of arduino connected to pin 10 of ethernet shield -> cut the feet of D10 on arduino nano every (used by TX0)
 //This sketch is used to control the power supply of the decappers
+//Future Improvement - Add a pull-up resistor on the SSR so that if the arduino fail, the decappers can still be operated
 
 #include <UIPEthernet.h> // Used for Ethernet
 #include <EEPROM.h>
@@ -55,6 +56,7 @@ void loop() {
         if(currentLine == "home"){homePage(client_pntr); break;}
         if(currentLine == "powerOn"){powerOn = true;homePage(client_pntr);EEPROM.write(0,powerOn);Serial.println("power enabled");break;}
         if(currentLine == "powerOff"){powerOn = false;homePage(client_pntr);EEPROM.write(0,powerOn);Serial.println("Power off");break;}
+        if(currentLine == "getStatus"){getStatus(client_pntr);Serial.println("Returned status");break;}
         if(currentLine == "reset"){homePage(client_pntr);software_reset();}
         //if(currentLine == "favicon.ico"){homePage(client_pntr);break;}
         if(counterLine > 4){homePage(client_pntr);break;}

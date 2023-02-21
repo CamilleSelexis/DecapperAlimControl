@@ -30,3 +30,28 @@ void homePage(EthernetClient *client_pntr){
   ////Serial.println("Client stop called");
   client_pntr->stop();
 }
+
+void getStatus(client_pntr){
+    client_pntr->println(F("HTTP/1.1 200 OK"));
+  client_pntr->println(F("Content-Type: text/html"));
+  client_pntr->println(F("Connection: close"));  // the connection will be closed after completion of the response
+  client_pntr->println();
+  client_pntr->println(F("<!DOCTYPE HTML>"));
+  client_pntr->println(F("<html>"));
+  client_pntr->println(F("<body>"));
+  if(powerOn){
+    client_pntr->println(F("<p>status=1"));
+  }
+  else{
+    client_pntr->println(F("<p>status=2"))
+  }
+    //Close the connection
+  client_pntr->print("</p> </body>");
+  client_pntr->print("</html>");
+  delay(10);
+  //client_pntr->flush();
+  delay(500);
+  //while (client_pntr->read() != -1);
+  ////Serial.println("Client stop called");
+  client_pntr->stop();
+}
