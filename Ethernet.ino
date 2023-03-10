@@ -17,8 +17,8 @@ void homePage(EthernetClient *client_pntr){
   client_pntr->print("<p> Power : ");
   if(powerOn) client_pntr->println("<strong style= \"background-color:#00ff00\"> ON </strong>");
   else client_pntr->println("<strong style= \"background-color:#ff0000\"> OFF </strong>");
-  client_pntr->println(F("<p><a href=\"http://192.168.1.107/powerOn\">Enable the decappers</a></p>"));
-  client_pntr->println(F("<p><a href=\"http://192.168.1.107/powerOff\">Disable the decappers</a></p>"));
+  client_pntr->println(F("<p><a href=\"http://192.168.1.100/powerOn\">Enable the decappers</a></p>"));
+  client_pntr->println(F("<p><a href=\"http://192.168.1.100/powerOff\">Disable the decappers</a></p>"));
   client_pntr->print("<p> Connection closed by the server at internal time : ");client_pntr->print(millis());
   //Close the connection
   client_pntr->print("</p> </body>");
@@ -31,7 +31,7 @@ void homePage(EthernetClient *client_pntr){
   client_pntr->stop();
 }
 
-void getStatus(client_pntr){
+void getStatus(EthernetClient *client_pntr){
     client_pntr->println(F("HTTP/1.1 200 OK"));
   client_pntr->println(F("Content-Type: text/html"));
   client_pntr->println(F("Connection: close"));  // the connection will be closed after completion of the response
@@ -43,7 +43,7 @@ void getStatus(client_pntr){
     client_pntr->println(F("<p>status=1"));
   }
   else{
-    client_pntr->println(F("<p>status=2"))
+    client_pntr->println(F("<p>status=2"));
   }
     //Close the connection
   client_pntr->print("</p> </body>");

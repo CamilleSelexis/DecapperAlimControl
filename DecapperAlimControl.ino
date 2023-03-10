@@ -12,7 +12,7 @@
 
 // **** ETHERNET SETTING ****
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x0D, 0x78, 0xEE  };                                       
-IPAddress ip(192, 168, 1, 107);                        
+IPAddress ip(192, 168, 1, 100);                        
 EthernetServer server(80); //Standard http port
 long counter = 0;
 long time_reset;
